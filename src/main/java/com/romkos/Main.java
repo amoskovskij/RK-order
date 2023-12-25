@@ -8,8 +8,8 @@ public class Main {
 
     static String PASSWORD = "romkos";
     static Scanner SCANNER = new Scanner(System.in);
-    static String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2}$";
-    static String NAME_PATTERN = "^[a-zA-Z]-?[a-zA-Z]-?[a-zA-Z]$";
+    static String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    static String NAME_PATTERN = "^[a-zA-Z]+-[a-zA-Z]+$";
 
     public static void main(String[] args) {
         run();

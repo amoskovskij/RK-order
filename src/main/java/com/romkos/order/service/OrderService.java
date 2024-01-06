@@ -7,8 +7,8 @@ import main.java.com.romkos.order.model.StandardOrder;
 
 public class OrderService {
 
-    private String STANDARD_ORDER_TYPE = "standard";
-    private String CUSTOM_ORDER_TYPE = "custom";
+    private final String STANDARD_ORDER_TYPE = "standard";
+    private final String CUSTOM_ORDER_TYPE = "custom";
 
     public Order registerNewOrder() {
         Order order = new Order();
@@ -80,6 +80,7 @@ public class OrderService {
 
     private StandardOrder orderToStandardOrder(Order order) {
         StandardOrder standardOrder = new StandardOrder();
+        standardOrder.setType(order.getType());
         standardOrder.setNumber(order.getNumber());
         standardOrder.setShippingDate(order.getShippingDate());
         standardOrder.setClientLastName(order.getClientLastName());
@@ -92,6 +93,7 @@ public class OrderService {
         standardOrder.setPackagingType(order.getPackagingType());
         standardOrder.setDeliveryMethod(order.getDeliveryMethod());
         standardOrder.setPrimaryColors(order.getPrimaryColors());
+        standardOrder.setManager(order.getManager());
 
         return standardOrder;
     }
@@ -111,6 +113,7 @@ public class OrderService {
 
     private CustomOrder orderToCustomOrder(Order order) {
         CustomOrder customOrder = new CustomOrder();
+        customOrder.setType(order.getType());
         customOrder.setNumber(order.getNumber());
         customOrder.setShippingDate(order.getShippingDate());
         customOrder.setClientLastName(order.getClientLastName());
@@ -123,6 +126,7 @@ public class OrderService {
         customOrder.setPackagingType(order.getPackagingType());
         customOrder.setDeliveryMethod(order.getDeliveryMethod());
         customOrder.setPrimaryColors(order.getPrimaryColors());
+        customOrder.setManager(order.getManager());
 
         return customOrder;
     }

@@ -7,8 +7,8 @@ import main.java.com.romkos.order.service.OrderService;
 
 public class ApplicationRunner {
 
-    private ManagerService managerService = new ManagerService();
-    private OrderService orderService = new OrderService();
+    private final ManagerService managerService = new ManagerService();
+    private final OrderService orderService = new OrderService();
 
     public void run() {
         if (Authenticator.auth()) {
@@ -18,8 +18,11 @@ public class ApplicationRunner {
                 System.out.println("Adding new order.");
                 Order order = orderService.registerNewOrder();
                 manager.setOrder(order);
-                order.setManager(manager.getFirstName() + " " + manager.getLastName());
+                order.setManager(manager);
                 System.out.println("Order has been created.");
+
+                System.out.println(manager);
+                System.out.println(order);
             }
         }
     }

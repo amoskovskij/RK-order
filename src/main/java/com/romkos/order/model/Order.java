@@ -1,5 +1,7 @@
 package main.java.com.romkos.order.model;
 
+import java.util.Objects;
+
 public class Order {
 
     private String type; // standard or custom
@@ -15,7 +17,56 @@ public class Order {
     private String packagingType; // film or cardboard
     private String deliveryMethod; // self-pickup or carrier, department No. 1
     private String primaryColors; // White/Blue
-    private String manager; // is set automatically
+    private Manager manager; // is set automatically
+
+    @Override
+    public String toString() {
+        return "Order {"
+                + "\n\tnumber = " + number
+                + "\n\tshippingDate = " + shippingDate
+                + "\n\tclientLastName = " + clientLastName
+                + "\n\tclientFirstName = " + clientFirstName
+                + "\n\tclientPhone = " + clientPhone
+                + "\n\tamount = " + amount
+                + "\n\tadvancePayment = " + advancePayment
+                + "\n\tdeliveryCity = " + deliveryCity
+                + "\n\tassemblyNeed = " + assemblyNeed
+                + "\n\tpackagingType = " + packagingType
+                + "\n\tdeliveryMethod = " + deliveryMethod
+                + "\n\tprimaryColors = " + primaryColors
+                + "\n\t\tmanager = " + manager
+                + "\n}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Float.compare(amount, order.amount) == 0
+                && Float.compare(advancePayment, order.advancePayment) == 0
+                && assemblyNeed == order.assemblyNeed
+                && Objects.equals(type, order.type)
+                && Objects.equals(number, order.number)
+                && Objects.equals(shippingDate, order.shippingDate)
+                && Objects.equals(clientLastName, order.clientLastName)
+                && Objects.equals(clientFirstName, order.clientFirstName)
+                && Objects.equals(clientPhone, order.clientPhone)
+                && Objects.equals(deliveryCity, order.deliveryCity)
+                && Objects.equals(packagingType, order.packagingType)
+                && Objects.equals(deliveryMethod, order.deliveryMethod)
+                && Objects.equals(primaryColors, order.primaryColors)
+                && Objects.equals(manager, order.manager);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, number, shippingDate,
+                clientLastName, clientFirstName, clientPhone,
+                amount, advancePayment, deliveryCity,
+                assemblyNeed, packagingType, deliveryMethod,
+                primaryColors, manager);
+    }
 
     public String getType() {
         return type;
@@ -133,11 +184,11 @@ public class Order {
         this.primaryColors = primaryColors;
     }
 
-    public String getManager() {
+    public Manager getManager() {
         return manager;
     }
 
-    public void setManager(String manager) {
+    public void setManager(Manager manager) {
         this.manager = manager;
     }
 }

@@ -4,7 +4,7 @@ import main.java.com.romkos.order.Main;
 
 public class Authenticator {
 
-    private static String PASSWORD = "romkos";
+    private static final String PASSWORD = "romkos";
 
     public static boolean auth() {
         boolean accepted = false;

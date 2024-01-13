@@ -7,6 +7,12 @@ public class CustomOrder extends Order {
     private String designer;
     private String comment;
 
+    public CustomOrder() { }
+
+    public CustomOrder(String shippingDate) {
+        this.setShippingDate(shippingDate);
+    }
+
     @Override
     public String toString() {
         return "CustomOrder {"

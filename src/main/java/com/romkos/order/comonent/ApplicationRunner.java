@@ -17,9 +17,12 @@ public class ApplicationRunner {
             if (manager != null) {
                 System.out.println("Adding new order.");
                 Order order = orderService.registerNewOrder();
-                manager.setOrder(order);
-                order.setManager(manager);
-                System.out.println("Order has been created.");
+
+                if (order != null) {
+                    manager.setOrder(order);
+                    order.setManagerName(manager.getLastName() + " " + manager.getFirstName());
+                    System.out.println("Order has been created.");
+                }
 
                 System.out.println(manager);
                 System.out.println(order);

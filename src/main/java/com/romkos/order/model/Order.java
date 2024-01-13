@@ -2,7 +2,7 @@ package main.java.com.romkos.order.model;
 
 import java.util.Objects;
 
-public class Order {
+public abstract class Order {
 
     private String type; // standard or custom
     private String number; // RK-1
@@ -17,7 +17,7 @@ public class Order {
     private String packagingType; // film or cardboard
     private String deliveryMethod; // self-pickup or carrier, department No. 1
     private String primaryColors; // White/Blue
-    private Manager manager; // is set automatically
+    private String managerName; // is set automatically
 
     @Override
     public String toString() {
@@ -34,7 +34,7 @@ public class Order {
                 + "\n\tpackagingType = " + packagingType
                 + "\n\tdeliveryMethod = " + deliveryMethod
                 + "\n\tprimaryColors = " + primaryColors
-                + "\n\t\tmanager = " + manager
+                + "\n\tmanagerName = " + managerName
                 + "\n}";
     }
 
@@ -56,7 +56,7 @@ public class Order {
                 && Objects.equals(packagingType, order.packagingType)
                 && Objects.equals(deliveryMethod, order.deliveryMethod)
                 && Objects.equals(primaryColors, order.primaryColors)
-                && Objects.equals(manager, order.manager);
+                && Objects.equals(managerName, order.managerName);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Order {
                 clientLastName, clientFirstName, clientPhone,
                 amount, advancePayment, deliveryCity,
                 assemblyNeed, packagingType, deliveryMethod,
-                primaryColors, manager);
+                primaryColors, managerName);
     }
 
     public String getType() {
@@ -184,11 +184,11 @@ public class Order {
         this.primaryColors = primaryColors;
     }
 
-    public Manager getManager() {
-        return manager;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
     }
 }

@@ -11,28 +11,28 @@ public class OrderService {
     private final String CUSTOM_ORDER_TYPE = "custom";
 
     public Order registerNewOrder() {
-        Order order = new Order();
+        Order order = null;
 
         System.out.print("Order type (standard / custom): ");
         String type = Main.SCANNER.nextLine();
 
-        if (STANDARD_ORDER_TYPE.equals(type)) {
-            order = buildStandardOrder();
-        } else if (CUSTOM_ORDER_TYPE.equals(type)) {
-            order = buildCustomOrder();
+        if (STANDARD_ORDER_TYPE.equals(type) || CUSTOM_ORDER_TYPE.equals(type)) {
+            order = buildOrder(type);
+        } else {
+            System.out.println("Unknown order type: " + type);
         }
 
         return order;
     }
 
     private Order buildOrder(String type) {
-        Order order = new Order();
+        Order order = type.equals(STANDARD_ORDER_TYPE) ? new StandardOrder() : new CustomOrder();
         order.setType(type);
 
         System.out.print("Order number (RK-1): ");
         order.setNumber(Main.SCANNER.nextLine());
 
-        System.out.print("Shipping date (12.01.2024): ");
+        System.out.print("Shipping date (yyyy.mm.dd): ");
         order.setShippingDate(Main.SCANNER.nextLine());
 
         System.out.print("Client's last name (Shevchenko): ");
@@ -65,70 +65,19 @@ public class OrderService {
         System.out.print("Order primary colors (White/Blue): ");
         order.setPrimaryColors(Main.SCANNER.nextLine());
 
+        if (type.equals(STANDARD_ORDER_TYPE)) {
+            System.out.print("Technologist name: ");
+            ((StandardOrder) order).setTechnologist(Main.SCANNER.nextLine());
+        }
+
+        if (type.equals(CUSTOM_ORDER_TYPE)) {
+            System.out.print("Designer name: ");
+            ((CustomOrder) order).setDesigner(Main.SCANNER.nextLine());
+            System.out.print("Order comment: ");
+            ((CustomOrder) order).setComment(Main.SCANNER.nextLine());
+        }
+
         return order;
-    }
-
-    private StandardOrder buildStandardOrder() {
-        Order order = buildOrder(STANDARD_ORDER_TYPE);
-        StandardOrder standardOrder = orderToStandardOrder(order);
-
-        System.out.print("Technologist name: ");
-        standardOrder.setTechnologist(Main.SCANNER.nextLine());
-
-        return standardOrder;
-    }
-
-    private StandardOrder orderToStandardOrder(Order order) {
-        StandardOrder standardOrder = new StandardOrder();
-        standardOrder.setType(order.getType());
-        standardOrder.setNumber(order.getNumber());
-        standardOrder.setShippingDate(order.getShippingDate());
-        standardOrder.setClientLastName(order.getClientLastName());
-        standardOrder.setClientFirstName(order.getClientFirstName());
-        standardOrder.setClientPhone(order.getClientPhone());
-        standardOrder.setAmount(order.getAmount());
-        standardOrder.setAdvancePayment(order.getAdvancePayment());
-        standardOrder.setDeliveryCity(order.getDeliveryCity());
-        standardOrder.setAssemblyNeed(order.getAssemblyNeed());
-        standardOrder.setPackagingType(order.getPackagingType());
-        standardOrder.setDeliveryMethod(order.getDeliveryMethod());
-        standardOrder.setPrimaryColors(order.getPrimaryColors());
-        standardOrder.setManager(order.getManager());
-
-        return standardOrder;
-    }
-
-    private CustomOrder buildCustomOrder() {
-        Order order = buildOrder(CUSTOM_ORDER_TYPE);
-        CustomOrder customOrder = orderToCustomOrder(order);
-
-        System.out.print("Designer name: ");
-        customOrder.setDesigner(Main.SCANNER.nextLine());
-
-        System.out.print("Order comment: ");
-        customOrder.setComment(Main.SCANNER.nextLine());
-
-        return customOrder;
-    }
-
-    private CustomOrder orderToCustomOrder(Order order) {
-        CustomOrder customOrder = new CustomOrder();
-        customOrder.setType(order.getType());
-        customOrder.setNumber(order.getNumber());
-        customOrder.setShippingDate(order.getShippingDate());
-        customOrder.setClientLastName(order.getClientLastName());
-        customOrder.setClientFirstName(order.getClientFirstName());
-        customOrder.setClientPhone(order.getClientPhone());
-        customOrder.setAmount(order.getAmount());
-        customOrder.setAdvancePayment(order.getAdvancePayment());
-        customOrder.setDeliveryCity(order.getDeliveryCity());
-        customOrder.setAssemblyNeed(order.getAssemblyNeed());
-        customOrder.setPackagingType(order.getPackagingType());
-        customOrder.setDeliveryMethod(order.getDeliveryMethod());
-        customOrder.setPrimaryColors(order.getPrimaryColors());
-        customOrder.setManager(order.getManager());
-
-        return customOrder;
     }
 
 }

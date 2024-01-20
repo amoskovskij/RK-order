@@ -56,23 +56,38 @@ public class OrderService {
         System.out.print("Order assembly is necessary (Y/N): ");
         order.setAssemblyNeed(Main.SCANNER.nextLine());
 
-        System.out.print("Order type of packaging (film / cardboard): ");
-        order.setPackagingType(Main.SCANNER.nextLine());
+        System.out.print("Select packaging type:\n" +
+                "\t(1) film\n" +
+                "\t(2) cardboard\n" +
+                "\t(0) UNKNOWN\n");
+        String packagingType = Main.SCANNER.nextLine();
+        order.setPackagingType(Order.PackagingType.getPackagingTypeByValue(packagingType));
 
         System.out.print("Order delivery method (self-pickup / carrier, dep. No. 1): ");
         order.setDeliveryMethod(Main.SCANNER.nextLine());
 
-        System.out.print("Order primary colors (White/Blue): ");
+        System.out.print("Order primary colors (White_Blue): ");
         order.setPrimaryColors(Main.SCANNER.nextLine());
 
         if (type.equals(STANDARD_ORDER_TYPE)) {
-            System.out.print("Technologist name: ");
-            ((StandardOrder) order).setTechnologist(Main.SCANNER.nextLine());
+            System.out.print("Select technologist:\n" +
+                    "\t(1) Moskovskyi Oleksii\n" +
+                    "\t(2) Kryvokulskyi Vasyl\n" +
+                    "\t(3) Plyahovets Oleksii\n" +
+                    "\t(0) UNKNOWN\n");
+            String technologist = Main.SCANNER.nextLine();
+            ((StandardOrder) order).setTechnologist(StandardOrder.Technologist.getTechnologistByValue(technologist));
         }
 
         if (type.equals(CUSTOM_ORDER_TYPE)) {
-            System.out.print("Designer name: ");
-            ((CustomOrder) order).setDesigner(Main.SCANNER.nextLine());
+            System.out.print("Select designer:\n" +
+                    "\t(1) Sydorenko V'yacheslav\n" +
+                    "\t(2) Yakymenko Pavlo\n" +
+                    "\t(3) Plyahovets Oleksii\n" +
+                    "\t(4) Moskovskyi Oleksii\n" +
+                    "\t(0) UNKNOWN\n");
+            String designer = Main.SCANNER.nextLine();
+            ((CustomOrder) order).setDesigner(CustomOrder.Designer.getDesignerByValue(designer));
             System.out.print("Order comment: ");
             ((CustomOrder) order).setComment(Main.SCANNER.nextLine());
         }

@@ -14,7 +14,7 @@ public abstract class Order {
     private float advancePayment; // 500.25
     private String deliveryCity; // Kharkiv
     private boolean assemblyNeed; // Y or N
-    private String packagingType; // film or cardboard
+    private PackagingType packagingType; // film or cardboard
     private String deliveryMethod; // self-pickup or carrier, department No. 1
     private String primaryColors; // White/Blue
     private String managerName; // is set automatically
@@ -160,11 +160,11 @@ public abstract class Order {
         this.assemblyNeed = assemblyNeed;
     }
 
-    public String getPackagingType() {
+    public PackagingType getPackagingType() {
         return packagingType;
     }
 
-    public void setPackagingType(String packagingType) {
+    public void setPackagingType(PackagingType packagingType) {
         this.packagingType = packagingType;
     }
 
@@ -190,5 +190,30 @@ public abstract class Order {
 
     public void setManagerName(String managerName) {
         this.managerName = managerName;
+    }
+
+    public enum PackagingType {
+        film("1"),
+        cardboard("2"),
+        UNKNOWN("0");
+
+        private final String value;
+
+        PackagingType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static PackagingType getPackagingTypeByValue(String value) {
+            for (PackagingType t : PackagingType.values()) {
+                if (t.value.equals(value)) {
+                    return t;
+                }
+            }
+            return PackagingType.UNKNOWN;
+        }
     }
 }

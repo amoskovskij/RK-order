@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class CustomOrder extends Order {
 
-    private String designer;
+    private Designer designer;
     private String comment;
 
     public CustomOrder() { }
@@ -38,11 +38,11 @@ public class CustomOrder extends Order {
         return Objects.hash(super.hashCode(), designer, comment);
     }
 
-    public String getDesigner() {
+    public Designer getDesigner() {
         return designer;
     }
 
-    public void setDesigner(String designer) {
+    public void setDesigner(Designer designer) {
         this.designer = designer;
     }
 
@@ -52,5 +52,32 @@ public class CustomOrder extends Order {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public enum Designer {
+        Sydorenko("1"),
+        Yakymenko("2"),
+        Plyahovets("3"),
+        Moskovskyi("4"),
+        UNKNOWN("0");
+
+        private final String value;
+
+        Designer(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static Designer getDesignerByValue(String value) {
+            for (Designer d : Designer.values()) {
+                if (d.value.equals(value)) {
+                    return d;
+                }
+            }
+            return Designer.UNKNOWN;
+        }
     }
 }

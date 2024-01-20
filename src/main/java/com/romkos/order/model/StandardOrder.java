@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class StandardOrder extends Order {
 
-    private String technologist;
+    private Technologist technologist;
 
     @Override
     public String toString() {
@@ -29,11 +29,37 @@ public class StandardOrder extends Order {
         return Objects.hash(super.hashCode(), technologist);
     }
 
-    public String getTechnologist() {
+    public Technologist getTechnologist() {
         return technologist;
     }
 
-    public void setTechnologist(String technologist) {
+    public void setTechnologist(Technologist technologist) {
         this.technologist = technologist;
+    }
+
+    public enum Technologist {
+        Moskovskyi("1"),
+        Kryvokulskyi("2"),
+        Plyahovets("3"),
+        UNKNOWN("0");
+
+        private final String value;
+
+        Technologist(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static Technologist getTechnologistByValue(String value) {
+            for (Technologist t : Technologist.values()) {
+                if (t.value.equals(value)) {
+                    return t;
+                }
+            }
+            return Technologist.UNKNOWN;
+        }
     }
 }

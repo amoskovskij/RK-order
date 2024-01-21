@@ -32,7 +32,7 @@ public class OrderService {
         System.out.print("Order number (RK-1): ");
         order.setNumber(Main.SCANNER.nextLine());
 
-        System.out.print("Shipping date (yyyy.mm.dd): ");
+        System.out.print("Shipping date (dd.mm.yyyy): ");
         order.setShippingDate(Main.SCANNER.nextLine());
 
         System.out.print("Client's last name (Shevchenko): ");

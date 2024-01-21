@@ -9,13 +9,13 @@ public class SandBox {
 
     public static void main(String[] args) {
         CustomOrder[] customOrders = {
-                new CustomOrder("2024.01.10"),
-                new CustomOrder("2024.01.05"),
-                new CustomOrder("2024.01.11"),
-                new CustomOrder("2024.02.02"),
-                new CustomOrder("2024.01.01"),
-                new CustomOrder("2024.01.04"),
-                new CustomOrder("2024.01.10")
+                new CustomOrder("10.01.2024"),
+                new CustomOrder("05.01.2024"),
+                new CustomOrder("11.01.2024"),
+                new CustomOrder("02.02.2024"),
+                new CustomOrder("01.01.2024"),
+                new CustomOrder("04.01.2024"),
+                new CustomOrder("10.01.2024")
         };
 
         Arrays.sort(customOrders, new Comparator<CustomOrder>() {
@@ -28,6 +28,8 @@ public class SandBox {
         for (CustomOrder customOrder : customOrders) {
             System.out.println(customOrder.getShippingDate());
         }
+
+        System.out.println(customOrders[0]);
     }
 
 }

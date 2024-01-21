@@ -1,12 +1,18 @@
 package main.java.com.romkos.order.model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public abstract class Order {
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     private String type; // standard or custom
     private String number; // RK-1
-    private String shippingDate; // 12.01.2024
+    private LocalDate shippingDate; // 31.01.2024
     private String clientLastName; // Shevchenko
     private String clientFirstName; // Stepan
     private String clientPhone; // 067-012-34-56
@@ -18,12 +24,13 @@ public abstract class Order {
     private String deliveryMethod; // self-pickup or carrier, department No. 1
     private String primaryColors; // White/Blue
     private String managerName; // is set automatically
+    private final LocalDateTime registrationDate = LocalDateTime.now();
 
     @Override
     public String toString() {
         return "Order {"
                 + "\n\tnumber = " + number
-                + "\n\tshippingDate = " + shippingDate
+                + "\n\tshippingDate = " + shippingDate.format(DATE_FORMATTER)
                 + "\n\tclientLastName = " + clientLastName
                 + "\n\tclientFirstName = " + clientFirstName
                 + "\n\tclientPhone = " + clientPhone
@@ -35,6 +42,7 @@ public abstract class Order {
                 + "\n\tdeliveryMethod = " + deliveryMethod
                 + "\n\tprimaryColors = " + primaryColors
                 + "\n\tmanagerName = " + managerName
+                + "\n\tregistrationDate = " + registrationDate.format(DATE_TIME_FORMATTER)
                 + "\n}";
     }
 
@@ -84,12 +92,12 @@ public abstract class Order {
         this.number = number;
     }
 
-    public String getShippingDate() {
+    public LocalDate getShippingDate() {
         return shippingDate;
     }
 
     public void setShippingDate(String shippingDate) {
-        this.shippingDate = shippingDate;
+        this.shippingDate = LocalDate.parse(shippingDate, DATE_FORMATTER);
     }
 
     public String getClientLastName() {
@@ -190,6 +198,10 @@ public abstract class Order {
 
     public void setManagerName(String managerName) {
         this.managerName = managerName;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
     }
 
     public enum PackagingType {

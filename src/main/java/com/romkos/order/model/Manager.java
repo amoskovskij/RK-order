@@ -1,5 +1,7 @@
 package main.java.com.romkos.order.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Manager {
@@ -7,7 +9,7 @@ public class Manager {
     private String firstName;
     private String lastName;
     private String email;
-    private Order order;
+    private List<Order> orders = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -15,6 +17,7 @@ public class Manager {
                 + "firstName = " + firstName
                 + ", lastName = " + lastName
                 + ", email = " + email
+                + ",\n\t orders = " + orders
                 + "}";
     }
 
@@ -26,12 +29,12 @@ public class Manager {
         return Objects.equals(firstName, manager.firstName)
                 && Objects.equals(lastName, manager.lastName)
                 && Objects.equals(email, manager.email)
-                && Objects.equals(order, manager.order);
+                && Objects.equals(orders, manager.orders);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, order);
+        return Objects.hash(firstName, lastName, email, orders);
     }
 
     public String getFirstName() {
@@ -58,11 +61,15 @@ public class Manager {
         this.email = email;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrder() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 }

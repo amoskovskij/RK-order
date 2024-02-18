@@ -10,6 +10,7 @@ public class Manager {
     private String lastName;
     private String email;
     private List<Order> orders = new ArrayList<>();
+    private Location location;
 
     @Override
     public String toString() {
@@ -17,6 +18,7 @@ public class Manager {
                 + "firstName = " + firstName
                 + ", lastName = " + lastName
                 + ", email = " + email
+                + ", location = " + location
                 + ",\n\t orders = " + orders
                 + "}";
     }
@@ -61,15 +63,27 @@ public class Manager {
         this.email = email;
     }
 
-    public List<Order> getOrder() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrder(List<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
     public void addOrder(Order order) {
         orders.add(order);
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public enum Location {
+        KYIV, KHARKIV, ODESA
     }
 }

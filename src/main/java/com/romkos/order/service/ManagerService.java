@@ -33,7 +33,9 @@ public class ManagerService {
             System.out.println("Invalid Last name. Application has been stopped.");
             return manager;
         }
-        manager = buildManager(email, firstName, lastName);
+        System.out.print("Location: ");
+        String location = Main.SCANNER.nextLine();
+        manager = buildManager(email, firstName, lastName, location);
         System.out.println("New manager registered: "
                 + manager.getFirstName()
                 + " "
@@ -57,11 +59,13 @@ public class ManagerService {
         return !matcher.matches();
     }
 
-    private static Manager buildManager(String email, String firstName, String lastName) {
+    private static Manager buildManager(String email, String firstName, String lastName,
+                                        String location) {
         Manager manager = new Manager();
         manager.setEmail(email);
         manager.setFirstName(firstName);
         manager.setLastName(lastName);
+        manager.setLocation(Manager.Location.valueOf(location));
         return manager;
     }
 

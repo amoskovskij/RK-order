@@ -43,17 +43,23 @@ public class EntityRegister {
         List<Manager> fromKyiv = new ArrayList<>();
         List<Manager> fromKharkiv = new ArrayList<>();
         List<Manager> fromOdesa = new ArrayList<>();
+        List<Manager> fromLviv = new ArrayList<>();
+        List<Manager> unknownLocation = new ArrayList<>();
         for (Manager manager : managers) {
             switch (manager.getLocation()) {
                 case KYIV -> fromKyiv.add(manager);
                 case KHARKIV -> fromKharkiv.add(manager);
                 case ODESA -> fromOdesa.add(manager);
+                case LVIV -> fromLviv.add(manager);
+                case UNKNOWN -> unknownLocation.add(manager);
             }
         }
         Map<Manager.Location, List<Manager>> managersByLocation = new HashMap<>();
         managersByLocation.put(Manager.Location.KYIV, fromKyiv);
         managersByLocation.put(Manager.Location.KHARKIV, fromKharkiv);
         managersByLocation.put(Manager.Location.ODESA, fromOdesa);
+        managersByLocation.put(Manager.Location.LVIV, fromLviv);
+        managersByLocation.put(Manager.Location.UNKNOWN, unknownLocation);
         return managersByLocation;
     }
 

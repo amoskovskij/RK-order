@@ -29,20 +29,20 @@ public abstract class Order {
     @Override
     public String toString() {
         return "Order {"
-                + "\n\tnumber = " + number
-                + "\n\tshippingDate = " + shippingDate.format(DATE_FORMATTER)
-                + "\n\tclientLastName = " + clientLastName
-                + "\n\tclientFirstName = " + clientFirstName
-                + "\n\tclientPhone = " + clientPhone
-                + "\n\tamount = " + amount
-                + "\n\tadvancePayment = " + advancePayment
-                + "\n\tdeliveryCity = " + deliveryCity
-                + "\n\tassemblyNeed = " + assemblyNeed
-                + "\n\tpackagingType = " + packagingType
-                + "\n\tdeliveryMethod = " + deliveryMethod
-                + "\n\tprimaryColors = " + primaryColors
-                + "\n\tmanagerName = " + managerName
-                + "\n\tregistrationDate = " + registrationDate.format(DATE_TIME_FORMATTER)
+                + "\n\tnumber = " + getNumber()
+                + "\n\tshippingDate = " + getShippingDate().format(DATE_FORMATTER)
+                + "\n\tclientLastName = " + getClientLastName()
+                + "\n\tclientFirstName = " + getClientFirstName()
+                + "\n\tclientPhone = " + getClientPhone()
+                + "\n\tamount = " + getAmount()
+                + "\n\tadvancePayment = " + getAdvancePayment()
+                + "\n\tdeliveryCity = " + getDeliveryCity()
+                + "\n\tassemblyNeed = " + getAssemblyNeed()
+                + "\n\tpackagingType = " + getPackagingType()
+                + "\n\tdeliveryMethod = " + getDeliveryMethod()
+                + "\n\tprimaryColors = " + getPrimaryColors()
+                + "\n\tmanagerName = " + getManagerName()
+                + "\n\tregistrationDate = " + getRegistrationDate().format(DATE_TIME_FORMATTER)
                 + "\n}";
     }
 
@@ -225,7 +225,8 @@ public abstract class Order {
                     return t;
                 }
             }
-            return PackagingType.UNKNOWN;
+            System.out.println("Unable to parse value '" + value + "'. Using default value: " + UNKNOWN);
+            return UNKNOWN;
         }
     }
 }

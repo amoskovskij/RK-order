@@ -11,7 +11,7 @@ public class StandardOrder extends Order {
         return "StandardOrder {"
                 + "\ntype = " + this.getType()
                 + "\n" + super.toString()
-                + "\ntechnologist = " + technologist
+                + "\ntechnologist = " + getTechnologist()
                 + "\n}";
     }
 
@@ -59,7 +59,8 @@ public class StandardOrder extends Order {
                     return t;
                 }
             }
-            return Technologist.UNKNOWN;
+            System.out.println("Unable to parse value '" + value + "'. Using default value: " + UNKNOWN);
+            return UNKNOWN;
         }
     }
 }

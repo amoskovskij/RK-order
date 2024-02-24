@@ -84,6 +84,6 @@ public class Manager {
     }
 
     public enum Location {
-        KYIV, KHARKIV, ODESA
+        KYIV, KHARKIV, ODESA, LVIV, UNKNOWN
     }
 }

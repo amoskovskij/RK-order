@@ -18,8 +18,8 @@ public class CustomOrder extends Order {
         return "CustomOrder {"
                 + "\ntype = " + this.getType()
                 + "\n" + super.toString()
-                + "\ndesigner = " + designer
-                + ", comment = " + comment
+                + "\ndesigner = " + getDesigner()
+                + ", comment = " + getComment()
                 + "\n}";
     }
 
@@ -77,7 +77,8 @@ public class CustomOrder extends Order {
                     return d;
                 }
             }
-            return Designer.UNKNOWN;
+            System.out.println("Unable to parse value '" + value + "'. Using default value: " + UNKNOWN);
+            return UNKNOWN;
         }
     }
 }

@@ -34,15 +34,26 @@ public class ManagerService {
             return manager;
         }
         System.out.print("Location: ");
-        String location = Main.SCANNER.nextLine();
+        Manager.Location location;
+        String locationInput = Main.SCANNER.nextLine();
+        try {
+            location = Manager.Location.valueOf(locationInput);
+        } catch (IllegalArgumentException e) {
+            location = Manager.Location.UNKNOWN;
+            System.out.println("Unable to parse value '" + locationInput
+                    + "'. Using default value: " + Manager.Location.UNKNOWN);
+        }
+
         manager = buildManager(email, firstName, lastName, location);
+
         System.out.println("New manager registered: "
                 + manager.getFirstName()
                 + " "
                 + manager.getLastName()
                 + " ("
                 + manager.getEmail()
-                + ")");
+                + ") from "
+                + manager.getLocation());
 
         return manager;
     }
@@ -60,12 +71,12 @@ public class ManagerService {
     }
 
     private static Manager buildManager(String email, String firstName, String lastName,
-                                        String location) {
+                                        Manager.Location location) {
         Manager manager = new Manager();
         manager.setEmail(email);
         manager.setFirstName(firstName);
         manager.setLastName(lastName);
-        manager.setLocation(Manager.Location.valueOf(location));
+        manager.setLocation(location);
         return manager;
     }
 

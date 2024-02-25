@@ -3,6 +3,7 @@ package main.java.com.romkos.order.service;
 import main.java.com.romkos.order.Main;
 import main.java.com.romkos.order.model.Manager;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ public class ManagerService {
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String NAME_PATTERN = "^[a-zA-Z]+-?[a-zA-Z]+$";
 
-    public Manager registerNewManager() {
+    public Optional<Manager> registerNewManager() {
         Manager manager = null;
 
         System.out.println("Please sign in.");
@@ -19,19 +20,19 @@ public class ManagerService {
         String email = Main.SCANNER.nextLine();
         if (isEmailNotValid(email)) {
             System.out.println("Invalid email. Application has been stopped.");
-            return manager;
+            return Optional.ofNullable(manager);
         }
         System.out.print("First name: ");
         String firstName = Main.SCANNER.nextLine();
         if (isNameNotValid(firstName)) {
             System.out.println("Invalid First name. Application has been stopped.");
-            return manager;
+            return Optional.ofNullable(manager);
         }
         System.out.print("Last name: ");
         String lastName = Main.SCANNER.nextLine();
         if (isNameNotValid(lastName)) {
             System.out.println("Invalid Last name. Application has been stopped.");
-            return manager;
+            return Optional.ofNullable(manager);
         }
         System.out.print("Location: ");
         Manager.Location location;
@@ -55,7 +56,7 @@ public class ManagerService {
                 + ") from "
                 + manager.getLocation());
 
-        return manager;
+        return Optional.ofNullable(manager);
     }
 
     private static boolean isEmailNotValid(String email) {

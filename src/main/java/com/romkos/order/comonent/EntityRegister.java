@@ -7,9 +7,10 @@ import main.java.com.romkos.order.service.ManagerService;
 import main.java.com.romkos.order.service.OrderService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class EntityRegister {
 
@@ -20,13 +21,13 @@ public class EntityRegister {
         List<Manager> managers = new ArrayList<>();
         String message = "Do you want to register more managers? (Y/N): ";
         do {
-            Manager manager = addManager();
-            if (manager != null) {
-                managers.add(manager);
-            }
+            Optional<Manager> manager = addManager();
+            manager.ifPresent(managers::add);
         } while(verifyRepeating(message));
 
-        Map<Manager.Location, List<Manager>> managersByLocation = groupManagers(managers);
+        Map<Manager.Location, List<Manager>> managersByLocation = managers.stream()
+                .collect(Collectors.groupingBy(Manager::getLocation));
+
         printManagers(managersByLocation);
     }
 
@@ -39,38 +40,11 @@ public class EntityRegister {
         }
     }
 
-    private Map<Manager.Location, List<Manager>> groupManagers(List<Manager> managers) {
-        List<Manager> fromKyiv = new ArrayList<>();
-        List<Manager> fromKharkiv = new ArrayList<>();
-        List<Manager> fromOdesa = new ArrayList<>();
-        List<Manager> fromLviv = new ArrayList<>();
-        List<Manager> unknownLocation = new ArrayList<>();
-        for (Manager manager : managers) {
-            switch (manager.getLocation()) {
-                case KYIV -> fromKyiv.add(manager);
-                case KHARKIV -> fromKharkiv.add(manager);
-                case ODESA -> fromOdesa.add(manager);
-                case LVIV -> fromLviv.add(manager);
-                case UNKNOWN -> unknownLocation.add(manager);
-            }
-        }
-        Map<Manager.Location, List<Manager>> managersByLocation = new HashMap<>();
-        managersByLocation.put(Manager.Location.KYIV, fromKyiv);
-        managersByLocation.put(Manager.Location.KHARKIV, fromKharkiv);
-        managersByLocation.put(Manager.Location.ODESA, fromOdesa);
-        managersByLocation.put(Manager.Location.LVIV, fromLviv);
-        managersByLocation.put(Manager.Location.UNKNOWN, unknownLocation);
-        return managersByLocation;
-    }
+    private Optional<Manager> addManager() {
+        Optional<Manager> manager = managerService.registerNewManager();
 
+        manager.ifPresent(this::registerOrders);
 
-    private Manager addManager() {
-        Manager manager = managerService.registerNewManager();
-
-        if (manager != null) {
-            registerOrders(manager);
-            System.out.println(manager);
-        }
         return manager;
     }
 
@@ -78,6 +52,7 @@ public class EntityRegister {
         String message = "Do you want to add more orders for current manager? (Y/N): ";
         do {
             addOrder(manager);
+            System.out.println(manager);
         } while(verifyRepeating(message));
     }
 
